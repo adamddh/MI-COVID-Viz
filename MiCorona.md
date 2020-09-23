@@ -65,10 +65,6 @@ mi_cases_by_day_exclusive %>%
   theme(legend.position = "none")
 ```
 
-    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
-
-    ## Warning: Removed 2 rows containing missing values (geom_smooth).
-
 ![](MiCorona_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Note that the last 4-5 days of data have been colored red on the graph,
