@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam DenHaan
-9/17/2020
+23 September, 2020
 
 Read in data:
 
