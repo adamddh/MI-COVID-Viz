@@ -1,0 +1,45 @@
+---
+title: "Michigan COVID Data"
+author: "Adam DenHaan"
+date: "9/17/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(ggplot2)
+require(lubridate)
+```
+
+
+Read in data:
+```{r}
+download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-22_703063_7.xlsx", destfile = "/tmp/file.xlsx")
+mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
+head(mi_data)
+```
+
+Manipulate Data:
+```{r}
+mi_cases_by_day = mi_data %>% 
+  na.omit() %>%
+  group_by(Date) %>%
+  mutate(Cases = sum(Cases)) %>%
+  filter(                         #most recent data is often inaccurate and revised
+    date(Date) != date(now()),
+    date(Date) != date(now()) - 1,
+    date(Date) != date(now()) - 2,
+    date(Date) != date(now()) - 3,
+    date(Date) != date(now()) - 4,
+  )
+
+mi_cases_by_day %>%
+  ggplot(mapping = aes(x = date(Date), y = Cases)) +
+  ylim(c(0,1700)) +
+  geom_point() + 
+  geom_smooth() +
+  scale_x_date(date_labels = "%m-%d",
+               date_breaks = "2 weeks") + 
+  labs(x = "Date")
+```
