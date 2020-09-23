@@ -2,7 +2,7 @@
 title: "Michigan COVID Data"
 author: "Adam DenHaan"
 date: "9/17/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
