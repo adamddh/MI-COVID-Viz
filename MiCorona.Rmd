@@ -1,7 +1,7 @@
 ---
 title: "Michigan COVID Data"
 author: "Adam DenHaan"
-date: "9/17/2020"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: github_document
 ---
 
