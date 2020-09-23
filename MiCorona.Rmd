@@ -30,14 +30,16 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
+day_split = 4
+
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                  #most recent data is often inaccurate and revised
-    Date < date(now()) - 4,
+    Date < date(now()) - day_split,
   )
 
 mi_cases_by_day_last4 <- mi_cases_by_day %>%
   filter(                         
-    Date >= date(now()) - 4,
+    Date >= date(now()) - day_split,
   )
 ```
 
