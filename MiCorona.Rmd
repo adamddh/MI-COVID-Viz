@@ -21,7 +21,7 @@ head(mi_data)
 ```
 
 Manipulate Data:
-```{r message=FALSE, warning=FALSE}
+```{r}
 mi_cases_by_day = mi_data %>% 
   na.omit() %>%
   group_by(Date) %>%
@@ -42,7 +42,7 @@ mi_cases_by_day_last4 <- mi_cases_by_day %>%
 ```
 
 Visualization:
-```{r}
+```{r message=FALSE, warning=FALSE}
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   ylim(c(0,1700)) +
