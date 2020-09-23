@@ -69,6 +69,7 @@ mi_cases_by_day_exclusive %>%
 
     ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
-![](MiCorona_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> Note that
-the last 4-5 days of data have been colored red on the graph, as they
-frequently change as more infomration becomes available.
+![](MiCorona_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+Note that the last 4-5 days of data have been colored red on the graph,
+as they frequently change as more infomration becomes available.
