@@ -46,7 +46,11 @@ mi_cases_by_day_last4 <- mi_cases_by_day %>%
   filter(                         
     Date >= date(now()) - 4,
   )
+```
 
+Visualization:
+
+``` r
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   ylim(c(0,1700)) +
@@ -58,10 +62,13 @@ mi_cases_by_day_exclusive %>%
   ) +
   scale_x_date(date_labels = "%m-%d",
                date_breaks = "2 weeks") + 
-  labs(x = "Date") + 
   theme(legend.position = "none")
 ```
 
-![](MiCorona_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> Note that
+    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+
+    ## Warning: Removed 2 rows containing missing values (geom_smooth).
+
+![](MiCorona_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> Note that
 the last 4-5 days of data have been colored red on the graph, as they
 frequently change as more infomration becomes available.
