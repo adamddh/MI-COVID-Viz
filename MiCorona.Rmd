@@ -15,7 +15,7 @@ require(lubridate)
 
 Read in data:
 ```{r}
-download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-22_703063_7.xlsx", destfile = "/tmp/file.xlsx")
+download.file("https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-09-24_703310_7.xlsx", destfile = "/tmp/file.xlsx")
 mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
 head(mi_data)
 ```
@@ -30,7 +30,7 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-day_split = 4
+day_split = 6
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                  #most recent data is often inaccurate and revised
