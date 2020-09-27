@@ -14,14 +14,16 @@ require(lubridate)
 
 
 Read in data:
-```{r}
+```{r data-load}
 download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-26_703515_7.xlsx", destfile = "/tmp/file.xlsx")
+
 mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
+
 head(mi_data)
 ```
 
-Manipulate Data:
-```{r}
+Wrangle Data:
+```{r data-wrangling}
 mi_cases_by_day = mi_data %>% 
   group_by(Date) %>%
   mutate(
@@ -43,7 +45,7 @@ mi_cases_by_day_last4 <- mi_cases_by_day %>%
 ```
 
 Visualization:
-```{r message=FALSE, warning=FALSE}
+```{r viz}
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   ylim(c(0,1700)) +
