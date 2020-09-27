@@ -7,7 +7,9 @@ Read in data:
 
 ``` r
 download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-26_703515_7.xlsx", destfile = "/tmp/file.xlsx")
+
 mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
+
 head(mi_data)
 ```
 
@@ -26,7 +28,7 @@ head(mi_data)
     ## 5 2020-09-26 13:41:58
     ## 6 2020-09-26 13:41:58
 
-Manipulate Data:
+Wrangle Data:
 
 ``` r
 mi_cases_by_day = mi_data %>% 
@@ -66,7 +68,11 @@ mi_cases_by_day_exclusive %>%
   theme(legend.position = "none")
 ```
 
-![](MiCorona_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+
+    ## Warning: Removed 2 rows containing missing values (geom_smooth).
+
+![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
 Note that the last 4-5 days of data have been colored red on the graph,
 as they frequently change as more infomration becomes available.
