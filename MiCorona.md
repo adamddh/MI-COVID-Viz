@@ -30,7 +30,6 @@ Manipulate Data:
 
 ``` r
 mi_cases_by_day = mi_data %>% 
-  na.omit() %>%
   group_by(Date) %>%
   mutate(
     Cases = sum(Cases),
