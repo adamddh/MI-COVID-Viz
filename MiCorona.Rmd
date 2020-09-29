@@ -15,7 +15,7 @@ require(lubridate)
 
 Read in data:
 ```{r data-load}
-download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-26_703515_7.xlsx", destfile = "/tmp/file.xlsx")
+download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-28_703604_7.xlsx", destfile = "/tmp/file.xlsx")
 
 mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
 

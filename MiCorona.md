@@ -1,12 +1,12 @@
 Michigan COVID Data
 ================
 Adam DenHaan
-27 September, 2020
+29 September, 2020
 
 Read in data:
 
 ``` r
-download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-26_703515_7.xlsx", destfile = "/tmp/file.xlsx")
+download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-09-28_703604_7.xlsx", destfile = "/tmp/file.xlsx")
 
 mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
 
@@ -21,12 +21,12 @@ head(mi_data)
     ## 5 Alcona 2020-03-05   Confirmed     0      0                0                 0
     ## 6 Alcona 2020-03-06   Confirmed     0      0                0                 0
     ##               Updated
-    ## 1 2020-09-26 13:41:58
-    ## 2 2020-09-26 13:41:58
-    ## 3 2020-09-26 13:41:58
-    ## 4 2020-09-26 13:41:58
-    ## 5 2020-09-26 13:41:58
-    ## 6 2020-09-26 13:41:58
+    ## 1 2020-09-28 14:35:55
+    ## 2 2020-09-28 14:35:55
+    ## 3 2020-09-28 14:35:55
+    ## 4 2020-09-28 14:35:55
+    ## 5 2020-09-28 14:35:55
+    ## 6 2020-09-28 14:35:55
 
 Wrangle Data:
 
