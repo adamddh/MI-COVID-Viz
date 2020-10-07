@@ -1,12 +1,12 @@
 Michigan COVID Data
 ================
 Adam DenHaan
-02 October, 2020
+07 October, 2020
 
 Read in data:
 
 ``` r
-download.file("https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-02_704164_7.xlsx", destfile = "/tmp/file.xlsx")
+download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-06_704363_7.xlsx", destfile = "/tmp/file.xlsx")
 
 mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
 
@@ -21,12 +21,12 @@ head(mi_data)
     ## 5 Alcona 2020-03-05   Confirmed     0      0                0                 0
     ## 6 Alcona 2020-03-06   Confirmed     0      0                0                 0
     ##               Updated
-    ## 1 2020-10-02 14:13:32
-    ## 2 2020-10-02 14:13:32
-    ## 3 2020-10-02 14:13:32
-    ## 4 2020-10-02 14:13:32
-    ## 5 2020-10-02 14:13:32
-    ## 6 2020-10-02 14:13:32
+    ## 1 2020-10-06 14:09:38
+    ## 2 2020-10-06 14:09:38
+    ## 3 2020-10-06 14:09:38
+    ## 4 2020-10-06 14:09:38
+    ## 5 2020-10-06 14:09:38
+    ## 6 2020-10-06 14:09:38
 
 Wrangle Data:
 
@@ -38,7 +38,7 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-day_split = 3
+day_split = 4
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                  #most recent data is often inaccurate and revised
