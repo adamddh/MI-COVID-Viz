@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam DenHaan
-10 October, 2020
+12 October, 2020
 
 Read in data:
 
@@ -38,7 +38,7 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-day_split = 1
+day_split = 3
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                  #most recent data is often inaccurate and revised
