@@ -1,6 +1,6 @@
 Michigan COVID Data
 ================
-Adam DenHaan
+Adam D. DenHaan
 12 October, 2020
 
 Read in data:
