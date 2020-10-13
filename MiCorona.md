@@ -8,25 +8,21 @@ Read in data:
 ``` r
 download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-10_704800_7.xlsx", destfile = "/tmp/file.xlsx")
 
-mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
+mi_data = readxl::read_excel("/tmp/file.xlsx")
 
 head(mi_data)
 ```
 
-    ##   COUNTY       Date CASE_STATUS Cases Deaths Cases.Cumulative Deaths.Cumulative
-    ## 1 Alcona 2020-03-01   Confirmed     0      0                0                 0
-    ## 2 Alcona 2020-03-02   Confirmed     0      0                0                 0
-    ## 3 Alcona 2020-03-03   Confirmed     0      0                0                 0
-    ## 4 Alcona 2020-03-04   Confirmed     0      0                0                 0
-    ## 5 Alcona 2020-03-05   Confirmed     0      0                0                 0
-    ## 6 Alcona 2020-03-06   Confirmed     0      0                0                 0
-    ##               Updated
-    ## 1 2020-10-10 14:21:15
-    ## 2 2020-10-10 14:21:15
-    ## 3 2020-10-10 14:21:15
-    ## 4 2020-10-10 14:21:15
-    ## 5 2020-10-10 14:21:15
-    ## 6 2020-10-10 14:21:15
+    ## # A tibble: 6 x 8
+    ##   COUNTY Date                CASE_STATUS Cases Deaths Cases.Cumulative
+    ##   <chr>  <dttm>              <chr>       <dbl>  <dbl>            <dbl>
+    ## 1 Alcona 2020-03-01 00:00:00 Confirmed       0      0                0
+    ## 2 Alcona 2020-03-02 00:00:00 Confirmed       0      0                0
+    ## 3 Alcona 2020-03-03 00:00:00 Confirmed       0      0                0
+    ## 4 Alcona 2020-03-04 00:00:00 Confirmed       0      0                0
+    ## 5 Alcona 2020-03-05 00:00:00 Confirmed       0      0                0
+    ## 6 Alcona 2020-03-06 00:00:00 Confirmed       0      0                0
+    ## # … with 2 more variables: Deaths.Cumulative <dbl>, Updated <dttm>
 
 Wrangle Data:
 
