@@ -71,4 +71,4 @@ mi_cases_by_day_exclusive %>%
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
 Note that the last 2 days of data have been colored red on the graph, as
-they frequently change as more infomration becomes available.
+they frequently change as more information becomes available.
