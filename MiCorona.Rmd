@@ -17,7 +17,7 @@ Read in data:
 ```{r data-load}
 download.file("https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-10_704800_7.xlsx", destfile = "/tmp/file.xlsx")
 
-mi_data = data.frame(readxl::read_excel("/tmp/file.xlsx"))
+mi_data = readxl::read_excel("/tmp/file.xlsx")
 
 head(mi_data)
 ```
