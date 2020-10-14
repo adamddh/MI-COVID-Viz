@@ -60,4 +60,4 @@ mi_cases_by_day_exclusive %>%
   theme(legend.position = "none")
 ```
 
-Note that the last `r day_split-1` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
+Note that the last `r day_split` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
