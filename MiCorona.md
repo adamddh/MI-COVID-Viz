@@ -52,7 +52,7 @@ Visualization:
 ``` r
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
-  ylim(c(0,1700)) +
+  ylim(c(0,NA)) +
   geom_point() + 
   geom_smooth() +
   geom_point(
