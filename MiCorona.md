@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-19 October, 2020
+20 October, 2020
 
 Read in data:
 
@@ -34,7 +34,7 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-day_split = 2
+day_split = 3
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                  #most recent data is often inaccurate and revised
@@ -70,5 +70,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 1-3 days of data have been colored red on the graph,
+Note that the last 2-4 days of data have been colored red on the graph,
 as they frequently change as more information becomes available.
