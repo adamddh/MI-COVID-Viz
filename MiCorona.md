@@ -37,7 +37,7 @@ mi_cases_by_day = mi_data %>%
 day_split = 3
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
-  filter(                                   #most recent data is often inaccurate and revised
+  filter(                                 #most recent data is often inaccurate and revised
     Date < date(now()) - day_split,
   )
 
