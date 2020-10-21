@@ -15,7 +15,8 @@ require(lubridate)
 
 Read in data:
 ```{r data-load}
-download.file("https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-20_705588_7.xlsx", destfile = "/tmp/file.xlsx")
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-20_705588_7.xlsx"
+download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
 
@@ -31,7 +32,11 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-day_split = 3
+linkandnowdiff <- day(now()) - day(as.Date(strsplit(link, "_")[[1]][8]))
+  
+linkandnowdiff
+
+day_split = 3 + linkandnowdiff
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -60,4 +65,4 @@ mi_cases_by_day_exclusive %>%
   theme(legend.position = "none")
 ```
 
-Note that the last `r day_split-1`-`r day_split+1` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
+Note that the last `r day_split` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
