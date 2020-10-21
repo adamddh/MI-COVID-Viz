@@ -35,14 +35,9 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-linkandnowdiff <- day(now()) - day(as.Date(strsplit(link, "_")[[1]][8]))
-  
-linkandnowdiff
-```
+linkdate <- as.Date(strsplit(link, "_")[[1]][8])
+linkandnowdiff <- day(now()) - day(linkdate)
 
-    ## [1] 1
-
-``` r
 day_split = 3 + linkandnowdiff
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
@@ -70,7 +65,8 @@ mi_cases_by_day_exclusive %>%
   ) +
   scale_x_date(date_labels = "%m-%d",
                date_breaks = "2 weeks") + 
-  theme(legend.position = "none")
+  theme(legend.position = "none") + 
+  labs(title = str_c("Positive Cases per day, updated ", linkdate))
 ```
 
     ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
