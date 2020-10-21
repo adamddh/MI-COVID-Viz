@@ -6,7 +6,7 @@ Adam D. DenHaan
 Read in data:
 
 ``` r
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-20_705588_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-21_705701_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
@@ -38,16 +38,16 @@ mi_cases_by_day = mi_data %>%
 linkdate <- as.Date(strsplit(link, "_")[[1]][8])
 linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 3 + linkandnowdiff
+day_split = 5 + linkandnowdiff
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
-    Date < date(now()) - day_split,
+    Date < date(now()) - day_split + 1,
   )
 
 mi_cases_by_day_last4 <- mi_cases_by_day %>%
   filter(                         
-    Date >= date(now()) - day_split,
+    Date >= date(now()) - day_split + 1,
   )
 ```
 
@@ -75,5 +75,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 4 days of data have been colored red on the graph, as
+Note that the last 5 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
