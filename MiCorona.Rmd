@@ -16,7 +16,8 @@ require(stringr)
 
 Read in data:
 ```{r data-load}
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-23_705987_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-25_705987_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-24_706042_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
@@ -33,7 +34,7 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-linkdate <- as.Date(strsplit(link, "_")[[1]][8])
+linkdate <- as.Date(strsplit(link, "_")[[1]][6])
 linkandnowdiff <- day(now()) - day(linkdate)
 
 day_split = 3 + linkandnowdiff
