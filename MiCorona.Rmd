@@ -16,8 +16,7 @@ require(stringr)
 
 Read in data:
 ```{r data-load}
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-25_705987_7.xlsx"
-link = "https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-24_706042_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-26_706095_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
