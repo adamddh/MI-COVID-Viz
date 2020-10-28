@@ -16,7 +16,7 @@ require(stringr)
 
 Read in data:
 ```{r data-load}
-link = "https://www.michigan.gov/documents/coronavirus/Cases_by_County_and_Date_2020-10-26_706095_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_Date_2020-10-27_706231_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
@@ -25,7 +25,7 @@ head(mi_data)
 ```
 
 Wrangle Data:
-```{r data-wrangling}
+```{r data-wrangling, warning=FALSE}
 mi_cases_by_day = mi_data %>% 
   group_by(Date) %>%
   mutate(
@@ -33,10 +33,10 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-linkdate <- as.Date(strsplit(link, "_")[[1]][6])
+linkdate <- as.Date(strsplit(link, "_")[[1]][8])
 linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 3 + linkandnowdiff
+day_split = 5
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -47,6 +47,7 @@ mi_cases_by_day_last4 <- mi_cases_by_day %>%
   filter(                         
     Date >= date(now()) - day_split + 1,
   )
+length(unique(mi_cases_by_day_last4$Date))
 ```
 
 Visualization:
@@ -66,4 +67,4 @@ mi_cases_by_day_exclusive %>%
   labs(title = str_c("Positive Cases per day, updated ", linkdate))
 ```
 
-Note that the last `r day_split` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
+Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
