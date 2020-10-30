@@ -6,7 +6,7 @@ Oct 30, 2020
 Read in data:
 
 ``` r
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-10-29_706545_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-10-30_706632_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
@@ -35,10 +35,10 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-# linkdate <- as.Date(strsplit(link, "_")[[1]][8])
+# linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 4
+day_split = 3
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -49,10 +49,7 @@ mi_cases_by_day_last4 <- mi_cases_by_day %>%
   filter(                         
     Date >= date(now()) - day_split + 1,
   )
-length(unique(mi_cases_by_day_last4$Date))
 ```
-
-    ## [1] 3
 
 Visualization:
 
@@ -68,7 +65,8 @@ mi_cases_by_day_exclusive %>%
   ) +
   scale_x_date(date_labels = "%m-%d",
                date_breaks = "2 weeks") + 
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  labs(title = "Michigan Coronavirus Cases")
 ```
 
     ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
@@ -76,10 +74,6 @@ mi_cases_by_day_exclusive %>%
     ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
-
-``` r
-  # labs(title = str_c("Positive Cases per day, updated ", linkdate))
-```
 
 Note that the last 3 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
