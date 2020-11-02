@@ -29,6 +29,7 @@ Wrangle Data:
 
 ``` r
 mi_cases_by_day = mi_data %>% 
+  # filter(COUNTY == "Kent") %>%
   group_by(Date) %>%
   mutate(
     Cases = sum(Cases),
@@ -58,7 +59,7 @@ mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   ylim(c(0,NA)) +
   geom_point() + 
-  geom_smooth() +
+  geom_smooth(method = "gam") +
   geom_point(
     data = mi_cases_by_day_last4,
     mapping = aes(x = Date, y = Cases, color = "red"),
@@ -69,7 +70,7 @@ mi_cases_by_day_exclusive %>%
   labs(title = "Michigan Coronavirus Cases")
 ```
 
-    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+    ## `geom_smooth()` using formula 'y ~ s(x, bs = "cs")'
 
     ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
