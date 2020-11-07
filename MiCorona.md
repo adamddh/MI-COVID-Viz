@@ -1,12 +1,12 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 04, 2020
+Nov 06, 2020
 
 Read in data:
 
 ``` r
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-03_706790_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-06_707176_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
@@ -39,7 +39,7 @@ mi_cases_by_day = mi_data %>%
 # linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 5
+day_split = 2
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -76,5 +76,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 4 days of data have been colored red on the graph, as
+Note that the last 2 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
