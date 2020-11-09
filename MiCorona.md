@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 06, 2020
+Nov 09, 2020
 
 Read in data:
 
@@ -39,7 +39,7 @@ mi_cases_by_day = mi_data %>%
 # linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 2
+day_split = 5
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
