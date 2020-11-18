@@ -1,12 +1,12 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 16, 2020
+Nov 18, 2020
 
 Read in data:
 
 ``` r
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-14_707797_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-17_708059_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
@@ -72,9 +72,9 @@ mi_cases_by_day_exclusive %>%
 
     ## `geom_smooth()` using formula 'y ~ s(x, bs = "cs")'
 
-    ## Warning: Removed 2 rows containing missing values (geom_smooth).
+    ## Warning: Removed 1 rows containing missing values (geom_smooth).
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 3 days of data have been colored red on the graph, as
+Note that the last 4 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
