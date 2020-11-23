@@ -62,7 +62,7 @@ mi_cases_by_day_exclusive %>%
     mapping = aes(x = Date, y = Cases, color = "red"),
   ) +
   scale_x_date(date_labels = "%m-%d",
-               date_breaks = "2 weeks") + 
+               date_breaks = "3 weeks") + 
   theme(legend.position = "none") +
   labs(title = "Michigan Coronavirus Cases")
 ```
