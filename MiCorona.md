@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 21, 2020
+Nov 23, 2020
 
 Read in data:
 
@@ -65,7 +65,7 @@ mi_cases_by_day_exclusive %>%
     mapping = aes(x = Date, y = Cases, color = "red"),
   ) +
   scale_x_date(date_labels = "%m-%d",
-               date_breaks = "2 weeks") + 
+               date_breaks = "3 weeks") + 
   theme(legend.position = "none") +
   labs(title = "Michigan Coronavirus Cases")
 ```
@@ -76,5 +76,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 5 days of data have been colored red on the graph, as
+Note that the last 3 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
