@@ -1,12 +1,12 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 23, 2020
+Nov 28, 2020
 
 Read in data:
 
 ``` r
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-23_708630_7.xlsx"
+link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-28_708958_7.xlsx"
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
