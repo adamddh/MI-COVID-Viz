@@ -3,10 +3,40 @@ Michigan COVID Data
 Adam D. DenHaan
 Nov 28, 2020
 
+``` python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+
+url = "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html"
+
+page = urlopen(url)
+html_bytes = page.read()
+html = html_bytes.decode("utf-8")
+start_index = html.find("shortdesc")
+end_index = html.find("footerArea")
+data = html[start_index:end_index]
+
+soup = BeautifulSoup(data)
+links = []
+
+for link in soup.find_all('a'):
+    links.append(link.get('href'))
+
+for link in links:
+    try:
+        link.index("by_Date")
+        finallink = "https://michigan.gov" + link
+        break
+    except:
+        pass
+```
+
 Read in data:
 
 ``` r
-link = "https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_and_by_Date_of_Symptom_Onset_or_by_Date_of_Death2020-11-28_708958_7.xlsx"
+link = py$finallink
+
 download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
