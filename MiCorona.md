@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 28, 2020
+Nov 29, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -69,7 +69,7 @@ mi_cases_by_day = mi_data %>%
 # linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 5
+day_split = 7
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -106,5 +106,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 5 days of data have been colored red on the graph, as
+Note that the last 6 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
