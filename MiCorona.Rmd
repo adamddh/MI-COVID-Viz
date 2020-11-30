@@ -32,18 +32,10 @@ end_index = html.find("footerArea")
 data = html[start_index:end_index]
 
 soup = BeautifulSoup(data)
-links = []
+links = [link.get('href') for link in soup.find_all('a')]
 
-for link in soup.find_all('a'):
-    links.append(link.get('href'))
-
-for link in links:
-    try:
-        link.index("by_Date")
-        finallink = "https://michigan.gov" + link
-        break
-    except:
-        pass
+finallink = "https://michigan.gov" + \
+    [i for i in links if "by_Date" in i][0]
 ```
 
 
