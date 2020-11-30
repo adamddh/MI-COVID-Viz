@@ -56,7 +56,7 @@ download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
 
-head(mi_data)
+glimpse(mi_data)
 ```
 
 Wrangle Data:
