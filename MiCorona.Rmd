@@ -24,9 +24,7 @@ from bs4 import BeautifulSoup
 
 url = "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html"
 
-page = urlopen(url)
-html_bytes = page.read()
-html = html_bytes.decode("utf-8")
+html = urlopen(url).read().decode("utf-8")
 start_index = html.find("shortdesc")
 end_index = html.find("footerArea")
 data = html[start_index:end_index]
