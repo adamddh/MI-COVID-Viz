@@ -58,6 +58,8 @@ head(mi_data)
 Wrangle Data:
 
 ``` r
+date_update = format(max(mi_data$Updated), '%d %b %Y')
+
 mi_cases_by_day = mi_data %>% 
   # filter(COUNTY == "Kent") %>%
   group_by(Date) %>%
@@ -97,7 +99,7 @@ mi_cases_by_day_exclusive %>%
   scale_x_date(date_labels = "%m-%d",
                date_breaks = "3 weeks") + 
   theme(legend.position = "none") +
-  labs(title = "Michigan Coronavirus Cases")
+  labs(title = paste("Michigan Coronavirus Cases, updated ", date_update))
 ```
 
     ## `geom_smooth()` using formula 'y ~ s(x, bs = "cs")'

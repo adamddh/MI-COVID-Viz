@@ -61,6 +61,8 @@ head(mi_data)
 
 Wrangle Data:
 ```{r data-wrangling, warning=FALSE}
+date_update = format(max(mi_data$Updated), '%d %b %Y')
+
 mi_cases_by_day = mi_data %>% 
   # filter(COUNTY == "Kent") %>%
   group_by(Date) %>%
@@ -99,7 +101,7 @@ mi_cases_by_day_exclusive %>%
   scale_x_date(date_labels = "%m-%d",
                date_breaks = "3 weeks") + 
   theme(legend.position = "none") +
-  labs(title = "Michigan Coronavirus Cases")
+  labs(title = paste("Michigan Coronavirus Cases, updated ", date_update))
 ```
 
 Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
