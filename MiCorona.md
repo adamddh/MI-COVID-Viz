@@ -41,19 +41,19 @@ download.file(link, destfile = "/tmp/file.xlsx")
 
 mi_data = readxl::read_excel("/tmp/file.xlsx")
 
-head(mi_data)
+glimpse(mi_data)
 ```
 
-    ## # A tibble: 6 x 8
-    ##   COUNTY Date                CASE_STATUS Cases Deaths Cases.Cumulative
-    ##   <chr>  <dttm>              <chr>       <dbl>  <dbl>            <dbl>
-    ## 1 Alcona 2020-03-01 00:00:00 Confirmed       0      0                0
-    ## 2 Alcona 2020-03-02 00:00:00 Confirmed       0      0                0
-    ## 3 Alcona 2020-03-03 00:00:00 Confirmed       0      0                0
-    ## 4 Alcona 2020-03-04 00:00:00 Confirmed       0      0                0
-    ## 5 Alcona 2020-03-05 00:00:00 Confirmed       0      0                0
-    ## 6 Alcona 2020-03-06 00:00:00 Confirmed       0      0                0
-    ## # … with 2 more variables: Deaths.Cumulative <dbl>, Updated <dttm>
+    ## Rows: 48,054
+    ## Columns: 8
+    ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
+    ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
+    ## $ CASE_STATUS       <chr> "Confirmed", "Confirmed", "Confirmed", "Confirmed",…
+    ## $ Cases             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Updated           <dttm> 2020-11-28 13:25:03, 2020-11-28 13:25:03, 2020-11-…
 
 Wrangle Data:
 
