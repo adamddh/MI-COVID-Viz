@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 29, 2020
+Nov 30, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -10,9 +10,7 @@ from bs4 import BeautifulSoup
 
 url = "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html"
 
-page = urlopen(url)
-html_bytes = page.read()
-html = html_bytes.decode("utf-8")
+html = urlopen(url).read().decode("utf-8")
 start_index = html.find("shortdesc")
 end_index = html.find("footerArea")
 data = html[start_index:end_index]
@@ -36,7 +34,7 @@ mi_data = readxl::read_excel("/tmp/file.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 48,054
+    ## Rows: 48,407
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
@@ -45,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Updated           <dttm> 2020-11-28 13:25:03, 2020-11-28 13:25:03, 2020-11-…
+    ## $ Updated           <dttm> 2020-11-30 14:13:56, 2020-11-30 14:13:56, 2020-11-…
 
 Wrangle Data:
 
@@ -100,5 +98,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
