@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 30, 2020
+Dec 02, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("/tmp/file.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 48,407
+    ## Rows: 48,583
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Updated           <dttm> 2020-11-30 14:13:56, 2020-11-30 14:13:56, 2020-11-…
+    ## $ Updated           <dttm> 2020-12-01 14:36:14, 2020-12-01 14:36:14, 2020-12-…
 
 Wrangle Data:
 
@@ -98,5 +98,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 7 days of data have been colored red on the graph, as
+Note that the last 6 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
