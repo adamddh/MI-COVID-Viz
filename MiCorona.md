@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Dec 02, 2020
+Dec 03, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -27,14 +27,14 @@ Read in data:
 ``` r
 link = py$finallink
 
-download.file(link, destfile = "/tmp/file.xlsx")
+download.file(link, destfile = "data/file.xlsx")
 
-mi_data = readxl::read_excel("/tmp/file.xlsx")
+mi_data = readxl::read_excel("data/file.xlsx")
 
 glimpse(mi_data)
 ```
 
-    ## Rows: 48,760
+    ## Rows: 48,935
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Updated           <dttm> 2020-12-02 15:03:02, 2020-12-02 15:03:02, 2020-12-…
+    ## $ Updated           <dttm> 2020-12-03 14:49:35, 2020-12-03 14:49:35, 2020-12-…
 
 Wrangle Data:
 
@@ -61,7 +61,7 @@ mi_cases_by_day = mi_data %>%
 # linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 7
+day_split = 10
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -81,7 +81,7 @@ mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   ylim(c(0,NA)) +
   geom_point() + 
-  geom_smooth(method = "gam") +
+  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20)) +
   geom_point(
     data = mi_cases_by_day_last4,
     mapping = aes(x = Date, y = Cases, color = "red"),
@@ -92,11 +92,9 @@ mi_cases_by_day_exclusive %>%
   labs(title = paste("Michigan Coronavirus Cases, updated ", date_update))
 ```
 
-    ## `geom_smooth()` using formula 'y ~ s(x, bs = "cs")'
-
     ## Warning: Removed 1 rows containing missing values (geom_smooth).
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 7 days of data have been colored red on the graph, as
-they frequently change as more information becomes available.
+Note that the last 10 days of data have been colored red on the graph,
+as they frequently change as more information becomes available.

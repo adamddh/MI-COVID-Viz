@@ -42,9 +42,9 @@ Read in data:
 ```{r data-load}
 link = py$finallink
 
-download.file(link, destfile = "/tmp/file.xlsx")
+download.file(link, destfile = "data/file.xlsx")
 
-mi_data = readxl::read_excel("/tmp/file.xlsx")
+mi_data = readxl::read_excel("data/file.xlsx")
 
 glimpse(mi_data)
 ```
@@ -64,7 +64,7 @@ mi_cases_by_day = mi_data %>%
 # linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 7
+day_split = 10
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -83,7 +83,7 @@ mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   ylim(c(0,NA)) +
   geom_point() + 
-  geom_smooth(method = "gam") +
+  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20)) +
   geom_point(
     data = mi_cases_by_day_last4,
     mapping = aes(x = Date, y = Cases, color = "red"),
