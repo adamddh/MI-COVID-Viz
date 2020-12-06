@@ -27,9 +27,9 @@ Read in data:
 ``` r
 link = py$finallink
 
-download.file(link, destfile = "data/file.xlsx")
+download.file(link, destfile = "data/covid.xlsx")
 
-mi_data = readxl::read_excel("data/file.xlsx")
+mi_data = readxl::read_excel("data/covid.xlsx")
 
 glimpse(mi_data)
 ```
