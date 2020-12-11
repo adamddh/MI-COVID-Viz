@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Dec 08, 2020
+Dec 10, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 49,815
+    ## Rows: 50,167
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Updated           <dttm> 2020-12-08 14:17:10, 2020-12-08 14:17:10, 2020-12-…
+    ## $ Updated           <dttm> 2020-12-10 14:54:28, 2020-12-10 14:54:28, 2020-12-…
 
 Wrangle Data:
 
@@ -61,7 +61,7 @@ mi_cases_by_day = mi_data %>%
 # linkdate <- as.Date(strsplit(link, "_")[[1]][16])
 # linkandnowdiff <- day(now()) - day(linkdate)
 
-day_split = 10
+day_split = 7
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
   filter(                                   #most recent data is often inaccurate and revised
@@ -96,5 +96,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 10 days of data have been colored red on the graph,
-as they frequently change as more information becomes available.
+Note that the last 7 days of data have been colored red on the graph, as
+they frequently change as more information becomes available.
