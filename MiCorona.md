@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Dec 12, 2020
+Dec 13, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -87,7 +87,7 @@ mi_cases_by_day_exclusive %>%
     mapping = aes(x = Date, y = Cases, color = "red"),
   ) +
   scale_x_date(date_labels = "%m-%d",
-               date_breaks = "3 weeks") + 
+               date_breaks = "1 month") + 
   theme(legend.position = "none") +
   labs(title = paste("Michigan Coronavirus Cases, updated ", date_update))
 ```
@@ -96,5 +96,5 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 7 days of data have been colored red on the graph, as
+Note that the last 6 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
