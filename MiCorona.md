@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Dec 13, 2020
+Dec 15, 2020
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 50,519
+    ## Rows: 50,871
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Updated           <dttm> 2020-12-12 15:34:09, 2020-12-12 15:34:09, 2020-12-…
+    ## $ Updated           <dttm> 2020-12-14 13:50:18, 2020-12-14 13:50:18, 2020-12-…
 
 Wrangle Data:
 
@@ -64,12 +64,12 @@ mi_cases_by_day = mi_data %>%
 day_split = 7
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
-  filter(                                   #most recent data is often inaccurate and revised
+  dplyr::filter(                                   #most recent data is often inaccurate and revised
     Date < date(now()) - day_split + 1,
   )
 
 mi_cases_by_day_last4 <- mi_cases_by_day %>%
-  filter(                         
+  dplyr::filter(                         
     Date >= date(now()) - day_split + 1,
   )
 ```
