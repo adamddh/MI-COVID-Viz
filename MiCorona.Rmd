@@ -95,6 +95,3 @@ mi_cases_by_day_exclusive %>%
 ```
 
 Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. 
-
-
-TESTING
