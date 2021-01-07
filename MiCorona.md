@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Jan 05, 2021
+Jan 07, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 54,569
+    ## Rows: 55,097
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 20…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Updated           <dttm> 2021-01-04 13:34:46, 2021-01-04 13:34:46, 2021-01-…
+    ## $ Updated           <dttm> 2021-01-07 15:06:40, 2021-01-07 15:06:40, 2021-01-…
 
 Wrangle Data:
 
@@ -97,7 +97,7 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 3 weeks in the past (as hospitalizations usually follow
 cases by three weeks).
