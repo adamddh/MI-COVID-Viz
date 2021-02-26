@@ -12,10 +12,10 @@ require(ggplot2)
 require(lubridate)
 # require(stringr)
 require(reticulate)
-if (!py_module_available("matplotlib")) py_install("matplotlib")
+# if (!py_module_available("matplotlib")) py_install("matplotlib")
 if (!py_module_available("bs4")) py_install("bs4")
 if (!py_module_available("urllib")) py_install("urllib")
-py_run_string("import matplotlib.pyplot as plt; plt.switch_backend('agg')")
+# py_run_string("import matplotlib.pyplot as plt; plt.switch_backend('agg')")
 ```
 
 ```{python get-excel-link, results='hide'}
