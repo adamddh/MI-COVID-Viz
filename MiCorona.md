@@ -101,7 +101,6 @@ mi_cases_by_day_exclusive %>%
 ``` r
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Deaths)) +
-  geom_vline(xintercept = today() - 21, color = "orange") +
   ylim(c(0,NA)) +
   geom_point() + 
   geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20)) +
@@ -121,5 +120,5 @@ mi_cases_by_day_exclusive %>%
 
 Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
-orange line at 3 weeks in the past (as hospitalizations usually follow
-cases by three weeks).
+orange line at 3 weeks in the past (as hospitalizations and deaths
+usually follow cases by three weeks).

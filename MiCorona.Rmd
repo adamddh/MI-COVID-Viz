@@ -100,7 +100,6 @@ mi_cases_by_day_exclusive %>%
 ```{r viz2}
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Deaths)) +
-  geom_vline(xintercept = today() - 21, color = "orange") +
   ylim(c(0,NA)) +
   geom_point() + 
   geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20)) +
@@ -114,4 +113,4 @@ mi_cases_by_day_exclusive %>%
   labs(title = paste("Michigan Coronavirus Deaths, updated", date_update))
 ```
 
-Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. Vertical orange line at 3 weeks in the past (as hospitalizations usually follow cases by three weeks).
+Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. Vertical orange line at 3 weeks in the past (as hospitalizations and deaths usually follow cases by three weeks).
