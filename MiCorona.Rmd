@@ -63,9 +63,6 @@ mi_cases_by_day = mi_data %>%
     Date = date(Date)
   ) 
 
-# linkdate <- as.Date(strsplit(link, "_")[[1]][16])
-# linkandnowdiff <- day(now()) - day(linkdate)
-
 day_split = 7
 
 mi_cases_by_day_exclusive <- mi_cases_by_day %>%
