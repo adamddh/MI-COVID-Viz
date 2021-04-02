@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Mar 31, 2021
+Apr 01, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 69,530
+    ## Rows: 69,882
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-03-30 13:23:34, 2021-03-30 13:23:34, 2021-03-3…
+    ## $ Updated           <dttm> 2021-04-01 13:46:39, 2021-04-01 13:46:39, 2021-04-0…
 
 Wrangle Data:
 
@@ -115,11 +115,11 @@ mi_cases_by_day_exclusive %>%
   labs(title = paste("Michigan Coronavirus Deaths, updated", date_update))
 ```
 
-    ## Warning: Removed 3 rows containing missing values (geom_smooth).
+    ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 3 weeks in the past (as hospitalizations usually follow
 cases by three weeks).
