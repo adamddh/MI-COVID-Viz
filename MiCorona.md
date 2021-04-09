@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Apr 08, 2021
+Apr 09, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 70,938
+    ## Rows: 71,114
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
@@ -43,30 +43,47 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-04-07 13:43:14, 2021-04-07 13:43:14, 2021-04-0…
+    ## $ Updated           <dttm> 2021-04-08 14:23:56, 2021-04-08 14:23:56, 2021-04-0…
 
 Wrangle Data:
 
 ``` r
 date_update = format(max(mi_data$Updated), '%d %b %Y')
 
-mi_cases_by_day = mi_data %>% 
-  # filter(COUNTY == "Kent") %>%
-  group_by(Date) %>%
-  mutate(
-    Cases = sum(Cases),
-    Deaths = sum(Deaths),
-    Date = date(Date)
-  ) 
+#simplify cases
+simple_cases <- aggregate(
+  mi_data$Cases,
+  by = list(Category = mi_data$Date),
+  FUN = sum
+) %>%
+  rename(Date = Category, Cases = x)
 
+#simplify deaths
+simple_deaths <- aggregate(
+  mi_data$Deaths,
+  by = list(Category = mi_data$Date),
+  FUN = sum
+) %>%
+  rename(Date = Category, Deaths = x)
+
+#join data
+simple_data <-
+  inner_join(simple_cases, simple_deaths) %>%
+  mutate(Date = date(Date))
+```
+
+    ## Joining, by = "Date"
+
+``` r
 day_split = 7
 
-mi_cases_by_day_exclusive <- mi_cases_by_day %>%
+#split data by date
+mi_cases_by_day_exclusive <- simple_data %>%
   dplyr::filter(                                   
     Date < date(now()) - day_split + 1,
   )
 
-mi_cases_by_day_last4 <- mi_cases_by_day %>%
+mi_cases_by_day_last4 <- simple_data %>%
   dplyr::filter(                         
     Date >= date(now()) - day_split + 1,
   )
@@ -80,7 +97,11 @@ mi_cases_by_day_exclusive %>%
   geom_vline(xintercept = today() - 21, color = "orange") +
   ylim(c(0,NA)) +
   geom_point() + 
-  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20)) +
+  geom_smooth(
+    method = "gam",
+    formula = y ~ s(x, bs = "cs", k = 20),
+    se = FALSE
+  ) +
   geom_point(
     data = mi_cases_by_day_last4,
     mapping = aes(x = Date, y = Cases, color = "red"),
@@ -100,7 +121,11 @@ mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Deaths)) +
   ylim(c(0,NA)) +
   geom_point() + 
-  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20)) +
+  geom_smooth(
+    method = "gam",
+    formula = y ~ s(x, bs = "cs", k = 20),
+    se = FALSE
+  ) +
   geom_point(
     data = mi_cases_by_day_last4,
     mapping = aes(x = Date, y = Deaths, color = "red"),
