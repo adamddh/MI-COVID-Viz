@@ -98,7 +98,7 @@ mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   geom_vline(xintercept = today() - 21, color = "orange") +
   ylim(c(0,NA)) +
-  geom_point() + 
+  geom_point(alpha = .5) + 
   geom_smooth(
     method = "gam",
     formula = y ~ s(x, bs = "cs", k = 20),
@@ -118,7 +118,7 @@ mi_cases_by_day_exclusive %>%
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Deaths)) +
   ylim(c(0,NA)) +
-  geom_point() + 
+  geom_point(alpha = .5) + 
   geom_smooth(
     method = "gam",
     formula = y ~ s(x, bs = "cs", k = 20),
