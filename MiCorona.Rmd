@@ -45,7 +45,7 @@ link = py$finallink
 
 download.file(link, destfile = "data/covid.xlsx")
 
-
+mi_data = readxl::read_excel("data/covid.xlsx")
 
 glimpse(mi_data)
 ```
