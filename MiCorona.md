@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Apr 16, 2021
+Apr 18, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 72,348
+    ## Rows: 72,699
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-04-15 14:14:29, 2021-04-15 14:14:29, 2021-04-1…
+    ## $ Updated           <dttm> 2021-04-17 15:00:37, 2021-04-17 15:00:37, 2021-04-1…
 
 Wrangle Data:
 
