@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Apr 25, 2021
+Apr 26, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 73,933
+    ## Rows: 74,285
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-04-24 14:42:30, 2021-04-24 14:42:30, 2021-04-2…
+    ## $ Updated           <dttm> 2021-04-26 14:22:45, 2021-04-26 14:22:45, 2021-04-2…
 
 Wrangle Data:
 
@@ -94,7 +94,7 @@ Visualization:
 ``` r
 mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
-  geom_vline(xintercept = today() - 21, color = "orange") +
+  geom_vline(xintercept = today() - 28, color = "orange") +
   ylim(c(0,NA)) +
   geom_point(alpha = .5) + 
   geom_smooth(
@@ -140,7 +140,8 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
-orange line at 3 weeks in the past (as hospitalizations and deaths
-usually follow cases by three weeks).
+orange line at 4 weeks in the past (as hospitalizations and deaths
+usually follow cases by three weeks, and the deaths graph regression
+line is behind by another week).
