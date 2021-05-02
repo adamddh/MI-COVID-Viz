@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Apr 29, 2021
+May 01, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 74,811
+    ## Rows: 75,163
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-04-29 14:22:13, 2021-04-29 14:22:13, 2021-04-2…
+    ## $ Updated           <dttm> 2021-05-01 13:34:08, 2021-05-01 13:34:08, 2021-05-0…
 
 Wrangle Data:
 
@@ -136,7 +136,7 @@ mi_cases_by_day_exclusive %>%
   labs(title = paste("Michigan Coronavirus Deaths, updated", date_update))
 ```
 
-    ## Warning: Removed 3 rows containing missing values (geom_smooth).
+    ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
