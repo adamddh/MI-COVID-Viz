@@ -103,7 +103,7 @@ mi_cases_by_day_exclusive %>%
     method = "gam",
     formula = y ~ s(x, bs = "cs", k = 20),
     se = FALSE
-  ) 
+  ) +
   geom_point(
     data = mi_cases_by_day_last4,
     mapping = aes(x = Date, y = Cases, color = "red"),

@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-May 05, 2021
+May 12, 2021
 
 ``` python
 from urllib.request import urlopen
@@ -34,7 +34,7 @@ mi_data = readxl::read_excel("data/covid.xlsx")
 glimpse(mi_data)
 ```
 
-    ## Rows: 75,692
+    ## Rows: 77,093
     ## Columns: 8
     ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
     ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
@@ -43,7 +43,7 @@ glimpse(mi_data)
     ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
     ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-05-04 14:24:04, 2021-05-04 14:24:04, 2021-05-0…
+    ## $ Updated           <dttm> 2021-05-12 13:16:45, 2021-05-12 13:16:45, 2021-05-1…
 
 Wrangle Data:
 
@@ -96,7 +96,7 @@ mi_cases_by_day_exclusive %>%
   ggplot(mapping = aes(x = Date, y = Cases)) +
   geom_vline(xintercept = today() - 28, color = "orange") +
   ylim(c(0,NA)) +
-  geom_point(alpha = .5) + 
+  geom_point(alpha = .5) +
   geom_smooth(
     method = "gam",
     formula = y ~ s(x, bs = "cs", k = 20),
@@ -107,7 +107,7 @@ mi_cases_by_day_exclusive %>%
     mapping = aes(x = Date, y = Cases, color = "red"),
   ) +
   scale_x_date(date_labels = "%m-%d",
-               date_breaks = "1 month") + 
+               date_breaks = "1 month") +
   theme(legend.position = "none") +
   labs(title = paste("Michigan Coronavirus Cases, updated", date_update))
 ```
@@ -140,7 +140,7 @@ mi_cases_by_day_exclusive %>%
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 4 weeks in the past (as hospitalizations and deaths
 usually follow cases by three weeks, and the deaths graph regression
