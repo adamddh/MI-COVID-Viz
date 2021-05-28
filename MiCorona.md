@@ -3,11 +3,16 @@ Michigan COVID Data
 Adam D. DenHaan
 May 28, 2021
 
+Get link for data:
+
 ``` python
+import pandas as pd
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
 
 
+# Get data into pandas df
 url = "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html"
 
 html = urlopen(url).read().decode("utf-8")
@@ -15,101 +20,91 @@ start_index = html.find("shortdesc")
 end_index = html.find("footerArea")
 data = html[start_index:end_index]
 
-soup = BeautifulSoup(data)
+soup = BeautifulSoup(data, features="html.parser")
 links = [link.get('href') for link in soup.find_all('a')]
 
 finallink = "https://michigan.gov" + \
     [i for i in links if "by_Date" in i][0]
 ```
 
-Read in data:
+Download data:
 
 ``` r
-link = py$finallink
-
-download.file(link, destfile = "data/covid.xlsx")
-
+download.file(py$finallink, destfile = "data/covid.xlsx")
 mi_data = readxl::read_excel("data/covid.xlsx")
-
-glimpse(mi_data)
 ```
 
-    ## Rows: 79,728
-    ## Columns: 8
-    ## $ COUNTY            <chr> "Alcona", "Alcona", "Alcona", "Alcona", "Alcona", "A…
-    ## $ Date              <dttm> 2020-03-01, 2020-03-02, 2020-03-03, 2020-03-04, 202…
-    ## $ CASE_STATUS       <chr> "Confirmed", "Confirmed", "Confirmed", "Confirmed", …
-    ## $ Cases             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Deaths            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Cases.Cumulative  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Deaths.Cumulative <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Updated           <dttm> 2021-05-27 14:06:08, 2021-05-27 14:06:08, 2021-05-2…
+Clean data:
 
-Wrangle Data:
-
-``` r
-date_update = format(max(mi_data$Updated), '%d %b %Y')
-
-#simplify cases
-simple_cases <- aggregate(
-  mi_data$Cases,
-  by = list(Category = mi_data$Date),
-  FUN = sum
-) %>%
-  rename(Date = Category, Cases = x)
-
-#simplify deaths
-simple_deaths <- aggregate(
-  mi_data$Deaths,
-  by = list(Category = mi_data$Date),
-  FUN = sum
-) %>%
-  rename(Date = Category, Deaths = x)
-
-#join data
-simple_data <-
-  inner_join(simple_cases, simple_deaths) %>%
-  mutate(Date = date(Date))
+``` python
+mi_data = r.mi_data
+mi_data.head()
 ```
 
-    ## Joining, by = "Date"
+    ##    COUNTY       Date CASE_STATUS  Cases  Deaths  Cases.Cumulative  \
+    ## 0  Alcona 2020-03-01   Confirmed    0.0     0.0               0.0   
+    ## 1  Alcona 2020-03-02   Confirmed    0.0     0.0               0.0   
+    ## 2  Alcona 2020-03-03   Confirmed    0.0     0.0               0.0   
+    ## 3  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
+    ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
+    ## 
+    ##    Deaths.Cumulative                    Updated  
+    ## 0                0.0 2021-05-27 14:06:08.383200  
+    ## 1                0.0 2021-05-27 14:06:08.383200  
+    ## 2                0.0 2021-05-27 14:06:08.383200  
+    ## 3                0.0 2021-05-27 14:06:08.383200  
+    ## 4                0.0 2021-05-27 14:06:08.383200
+
+``` python
+max_date = max(mi_data["Updated"])
+
+agg_data = mi_data.groupby(["Date"],  as_index=False).sum()
+
+now = datetime.now()
+agg_data["color"] = agg_data["Date"].apply(
+  lambda date: "Red" if date > now - timedelta(7) else "Black")
+  
+mi_cases_by_day_last4 = agg_data[agg_data["Date"] > now - timedelta(7)]
+agg_data = agg_data[agg_data["Date"] <= now - timedelta(7)]
+```
 
 ``` r
-day_split = 7
-
-#split data by date
-mi_cases_by_day_exclusive <- simple_data %>%
-  dplyr::filter(                                   
-    Date < date(now()) - day_split + 1,
-  )
-
-mi_cases_by_day_last4 <- simple_data %>%
-  dplyr::filter(                         
-    Date >= date(now()) - day_split + 1,
-  )
+mi_cases_by_day_exclusive = py$agg_data
+date_update = format(py$max_date, '%d %b %Y')
+mi_cases_by_day_last4 = py$mi_cases_by_day_last4
 ```
 
 Visualization:
 
 ``` r
-mi_cases_by_day_exclusive %>%
-  ggplot(mapping = aes(x = Date, y = Cases)) +
-  geom_vline(xintercept = today() - 28, color = "orange") +
-  ylim(c(0,NA)) +
-  geom_point(alpha = .5) +
-  geom_smooth(
-    method = "gam",
-    formula = y ~ s(x, bs = "cs", k = 20),
-    se = FALSE
-  ) +
-  geom_point(
-    data = mi_cases_by_day_last4,
-    mapping = aes(x = Date, y = Cases, color = "red"),
-  ) +
-  scale_x_date(date_labels = "%m-%d",
-               date_breaks = "1 month") +
-  theme(legend.position = "none") +
-  labs(title = paste("Michigan Coronavirus Cases, updated", date_update))
+viz_function <- function(df, df2, x, y, vertline = TRUE) {
+  plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = {{y}})) +
+    ylim(c(0,NA)) +
+    geom_point(alpha = .5) +
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20), se = FALSE) +
+    geom_point(
+      data = df2,
+      mapping = aes(x = as.Date({{x}}),y = {{y}}, color = "red")
+    ) +
+    scale_x_date(date_labels = "%m-%d", date_breaks = "1 month") + 
+    theme(legend.position = "none") +
+    labs(
+      title = paste("Michigan Coronavirus", deparse(substitute(y)), "updated", date_update),
+      x = deparse(substitute(x))
+    )
+  if (vertline) {
+    plot <- append_layers(
+      plot,
+      geom_vline(xintercept = today() - 28, color = "orange"),
+      position = "bottom"
+    )
+  }
+  plot
+}
+```
+
+``` r
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases)
 ```
 
     ## Warning: Removed 1 rows containing missing values (geom_smooth).
@@ -117,23 +112,7 @@ mi_cases_by_day_exclusive %>%
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
 ``` r
-mi_cases_by_day_exclusive %>%
-  ggplot(mapping = aes(x = Date, y = Deaths)) +
-  ylim(c(0,NA)) +
-  geom_point(alpha = .5) + 
-  geom_smooth(
-    method = "gam",
-    formula = y ~ s(x, bs = "cs", k = 20),
-    se = FALSE
-  ) +
-  geom_point(
-    data = mi_cases_by_day_last4,
-    mapping = aes(x = Date, y = Deaths, color = "red"),
-  ) +
-  scale_x_date(date_labels = "%m-%d",
-               date_breaks = "1 month") + 
-  theme(legend.position = "none") +
-  labs(title = paste("Michigan Coronavirus Deaths, updated", date_update))
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE)
 ```
 
     ## Warning: Removed 2 rows containing missing values (geom_smooth).
