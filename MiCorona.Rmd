@@ -62,12 +62,10 @@ max_date = max(mi_data["Updated"])
 
 agg_data = mi_data.groupby(["Date"],  as_index=False).sum()
 
-now = datetime.now()
-agg_data["color"] = agg_data["Date"].apply(
-  lambda date: "Red" if date > now - timedelta(7) else "Black")
+diff = datetime.now() - timedelta(7)
   
-mi_cases_by_day_last4 = agg_data[agg_data["Date"] > now - timedelta(7)]
-agg_data = agg_data[agg_data["Date"] <= now - timedelta(7)]
+mi_cases_by_day_last4 = agg_data[agg_data["Date"] > diff]
+agg_data = agg_data[agg_data["Date"] <= diff]
 ```
 
 ```{r data-load}
