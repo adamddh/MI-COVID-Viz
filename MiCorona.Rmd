@@ -6,23 +6,33 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
+# R Setup
 knitr::opts_chunk$set(echo = TRUE, fig.path = "MiCorona_files/figure-gfm/")
-require(dplyr)
-require(ggplot2)
-require(lubridate)
-# require(stringr)
-require(reticulate)
-# if (!py_module_available("matplotlib")) py_install("matplotlib")
+library(dplyr)
+library(rlang)
+library(ggplot2)
+library(lubridate)
+library(gginnards)
+
+# Python Setup
+library(reticulate)
 if (!py_module_available("bs4")) py_install("bs4")
 if (!py_module_available("urllib")) py_install("urllib")
-# py_run_string("import matplotlib.pyplot as plt; plt.switch_backend('agg')")
+if (!py_module_available("pandas")) py_install("pandas")
+if (!py_module_available("datetime")) py_install("datetime")
+if (!py_module_available("openpyxl")) py_install("openpyxl")
+py_run_string("import pandas as pd; pd.options.display.max_columns = None")
 ```
 
+Get link for data:
 ```{python get-excel-link, results='hide'}
+import pandas as pd
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
 
 
+# Get data into pandas df
 url = "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html"
 
 html = urlopen(url).read().decode("utf-8")
@@ -30,108 +40,76 @@ start_index = html.find("shortdesc")
 end_index = html.find("footerArea")
 data = html[start_index:end_index]
 
-soup = BeautifulSoup(data)
+soup = BeautifulSoup(data, features="html.parser")
 links = [link.get('href') for link in soup.find_all('a')]
 
 finallink = "https://michigan.gov" + \
     [i for i in links if "by_Date" in i][0]
 ```
 
-
-
-Read in data:
-```{r data-load}
-link = py$finallink
-
-download.file(link, destfile = "data/covid.xlsx")
-
+Download data:
+```{r get-excel}
+download.file(py$finallink, destfile = "data/covid.xlsx")
 mi_data = readxl::read_excel("data/covid.xlsx")
-
-glimpse(mi_data)
 ```
 
-Wrangle Data:
+Clean data:
+```{python aggregate-data}
+mi_data = r.mi_data
+mi_data.head()
 
-```{r data-wrangling, warning=FALSE}
-date_update = format(max(mi_data$Updated), '%d %b %Y')
+max_date = max(mi_data["Updated"])
 
-#simplify cases
-simple_cases <- aggregate(
-  mi_data$Cases,
-  by = list(Category = mi_data$Date),
-  FUN = sum
-) %>%
-  rename(Date = Category, Cases = x)
+agg_data = mi_data.groupby(["Date"],  as_index=False).sum()
 
-#simplify deaths
-simple_deaths <- aggregate(
-  mi_data$Deaths,
-  by = list(Category = mi_data$Date),
-  FUN = sum
-) %>%
-  rename(Date = Category, Deaths = x)
-
-#join data
-simple_data <-
-  inner_join(simple_cases, simple_deaths) %>%
-  mutate(Date = date(Date))
-
-
-day_split = 7
-
-#split data by date
-mi_cases_by_day_exclusive <- simple_data %>%
-  dplyr::filter(                                   
-    Date < date(now()) - day_split + 1,
-  )
-
-mi_cases_by_day_last4 <- simple_data %>%
-  dplyr::filter(                         
-    Date >= date(now()) - day_split + 1,
-  )
+now = datetime.now()
+agg_data["color"] = agg_data["Date"].apply(
+  lambda date: "Red" if date > now - timedelta(7) else "Black")
+  
+mi_cases_by_day_last4 = agg_data[agg_data["Date"] > now - timedelta(7)]
+agg_data = agg_data[agg_data["Date"] <= now - timedelta(7)]
 ```
 
+```{r data-load}
+mi_cases_by_day_exclusive = py$agg_data
+date_update = format(py$max_date, '%d %b %Y')
+mi_cases_by_day_last4 = py$mi_cases_by_day_last4
+```
 
 Visualization:
+```{r viz_function}
+viz_function <- function(df, df2, x, y, vertline = TRUE) {
+  plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = {{y}})) +
+    ylim(c(0,NA)) +
+    geom_point(alpha = .5) +
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20), se = FALSE) +
+    geom_point(
+      data = df2,
+      mapping = aes(x = as.Date({{x}}),y = {{y}}, color = "red")
+    ) +
+    scale_x_date(date_labels = "%m-%d", date_breaks = "1 month") + 
+    theme(legend.position = "none") +
+    labs(
+      title = paste("Michigan Coronavirus", deparse(substitute(y)), "updated", date_update),
+      x = deparse(substitute(x))
+    )
+  if (vertline) {
+    plot <- append_layers(
+      plot,
+      geom_vline(xintercept = today() - 28, color = "orange"),
+      position = "bottom"
+    )
+  }
+  plot
+}
+```
+
 ```{r viz}
-mi_cases_by_day_exclusive %>%
-  ggplot(mapping = aes(x = Date, y = Cases)) +
-  geom_vline(xintercept = today() - 28, color = "orange") +
-  ylim(c(0,NA)) +
-  geom_point(alpha = .5) +
-  geom_smooth(
-    method = "gam",
-    formula = y ~ s(x, bs = "cs", k = 20),
-    se = FALSE
-  ) +
-  geom_point(
-    data = mi_cases_by_day_last4,
-    mapping = aes(x = Date, y = Cases, color = "red"),
-  ) +
-  scale_x_date(date_labels = "%m-%d",
-               date_breaks = "1 month") +
-  theme(legend.position = "none") +
-  labs(title = paste("Michigan Coronavirus Cases, updated", date_update))
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases)
 ```
 
 ```{r viz2}
-mi_cases_by_day_exclusive %>%
-  ggplot(mapping = aes(x = Date, y = Deaths)) +
-  ylim(c(0,NA)) +
-  geom_point(alpha = .5) + 
-  geom_smooth(
-    method = "gam",
-    formula = y ~ s(x, bs = "cs", k = 20),
-    se = FALSE
-  ) +
-  geom_point(
-    data = mi_cases_by_day_last4,
-    mapping = aes(x = Date, y = Deaths, color = "red"),
-  ) +
-  scale_x_date(date_labels = "%m-%d",
-               date_breaks = "1 month") + 
-  theme(legend.position = "none") +
-  labs(title = paste("Michigan Coronavirus Deaths, updated", date_update))
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE)
 ```
 
 Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. Vertical orange line at 4 weeks in the past (as hospitalizations and deaths usually follow cases by three weeks, and the deaths graph regression line is behind by another week).
