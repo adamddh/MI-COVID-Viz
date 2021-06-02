@@ -76,21 +76,34 @@ mi_cases_by_day_last4 = py$mi_cases_by_day_last4
 
 Visualization:
 ```{r viz_function}
-viz_function <- function(df, df2, x, y, vertline = TRUE) {
-  plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = {{y}})) +
+viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
+  
+  if (log) {
+    df  <- df  %>% mutate(y = log10({{y}}))
+    df2 <- df2 %>% mutate(y = log10({{y}}))
+    y_lbl = paste(deparse(substitute(y)), "(log10)")
+  } else {
+    df  <- df  %>% mutate(y = {{y}})
+    df2 <- df2 %>% mutate(y = {{y}})
+    y_lbl = deparse(substitute(y))
+  }
+  
+  plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = y)) +
     ylim(c(0,NA)) +
     geom_point(alpha = .5) +
     geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20), se = FALSE) +
     geom_point(
       data = df2,
-      mapping = aes(x = as.Date({{x}}),y = {{y}}, color = "red")
+      mapping = aes(x = as.Date({{x}}), y = y, color = "red")
     ) +
     scale_x_date(date_labels = "%m-%d", date_breaks = "1 month") + 
     theme(legend.position = "none") +
     labs(
       title = paste("Michigan Coronavirus", deparse(substitute(y)), "updated", date_update),
-      x = deparse(substitute(x))
+      x = deparse(substitute(x)),
+      y = y_lbl
     )
+  
   if (vertline) {
     plot <- append_layers(
       plot,
