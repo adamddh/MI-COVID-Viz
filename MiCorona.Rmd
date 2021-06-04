@@ -26,9 +26,8 @@ py_run_string("import pandas as pd; pd.options.display.max_columns = None")
 
 Get link for data:
 ```{python get-excel-link, results='hide'}
-import pandas as pd
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
 from datetime import datetime, timedelta
 
 

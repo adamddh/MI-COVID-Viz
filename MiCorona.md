@@ -6,9 +6,8 @@ Jun 04, 2021
 Get link for data:
 
 ``` python
-import pandas as pd
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
 from datetime import datetime, timedelta
 
 
