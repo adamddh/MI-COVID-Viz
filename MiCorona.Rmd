@@ -59,7 +59,7 @@ mi_data.head()
 
 max_date = max(mi_data["Updated"])
 
-agg_data = mi_data.groupby(["Date"],  as_index=False).sum()
+agg_data = mi_data.groupby(["Date"], as_index=False).sum()
 
 diff = datetime.now() - timedelta(7)
   
