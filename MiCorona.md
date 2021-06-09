@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Jun 08, 2021
+Jun 09, 2021
 
 Get link for data:
 
@@ -47,17 +47,17 @@ mi_data.head()
     ## 3  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
     ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
     ## 
-    ##    Deaths.Cumulative                    Updated  
-    ## 0                0.0 2021-06-07 13:29:20.317600  
-    ## 1                0.0 2021-06-07 13:29:20.317600  
-    ## 2                0.0 2021-06-07 13:29:20.317600  
-    ## 3                0.0 2021-06-07 13:29:20.317600  
-    ## 4                0.0 2021-06-07 13:29:20.317600
+    ##    Deaths.Cumulative                 Updated  
+    ## 0                0.0 2021-06-08 13:29:23.740  
+    ## 1                0.0 2021-06-08 13:29:23.740  
+    ## 2                0.0 2021-06-08 13:29:23.740  
+    ## 3                0.0 2021-06-08 13:29:23.740  
+    ## 4                0.0 2021-06-08 13:29:23.740
 
 ``` python
 max_date = max(mi_data["Updated"])
 
-agg_data = mi_data.groupby(["Date"],  as_index=False).sum()
+agg_data = mi_data.groupby(["Date"], as_index=False).sum()
 
 diff = datetime.now() - timedelta(7)
   
