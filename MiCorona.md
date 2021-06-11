@@ -48,11 +48,11 @@ mi_data.head()
     ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
     ## 
     ##    Deaths.Cumulative                       Updated  
-    ## 0                0.0 2021-06-09 13:15:45.331399936  
-    ## 1                0.0 2021-06-09 13:15:45.331399936  
-    ## 2                0.0 2021-06-09 13:15:45.331399936  
-    ## 3                0.0 2021-06-09 13:15:45.331399936  
-    ## 4                0.0 2021-06-09 13:15:45.331399936
+    ## 0                0.0 2021-06-10 12:43:29.704699904  
+    ## 1                0.0 2021-06-10 12:43:29.704699904  
+    ## 2                0.0 2021-06-10 12:43:29.704699904  
+    ## 3                0.0 2021-06-10 12:43:29.704699904  
+    ## 4                0.0 2021-06-10 12:43:29.704699904
 
 ``` python
 max_date = max(mi_data["Updated"])
@@ -89,7 +89,7 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
   plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = y)) +
     ylim(c(0,NA)) +
     geom_point(alpha = .5) +
-    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 20), se = FALSE) +
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 30), se = FALSE) +
     geom_point(
       data = df2,
       mapping = aes(x = as.Date({{x}}), y = y, color = "red")
@@ -129,7 +129,7 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 4 weeks in the past (as hospitalizations and deaths
 usually follow cases by three weeks, and the deaths graph regression
