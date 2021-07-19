@@ -114,7 +114,8 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
 ```
 
 ``` r
-viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases)
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases) /
+  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, log = TRUE)
 ```
 
     ## Warning: Removed 1 rows containing missing values (geom_smooth).
@@ -122,8 +123,13 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases)
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
 ``` r
-viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE)
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE) / 
+  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
 ```
+
+    ## Warning: Removed 2 rows containing missing values (geom_smooth).
+
+    ## Warning: Removed 13 rows containing non-finite values (stat_smooth).
 
     ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
