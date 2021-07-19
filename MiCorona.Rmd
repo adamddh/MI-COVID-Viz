@@ -115,12 +115,12 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
 }
 ```
 
-```{r viz, fig.height=10, dpi=300}
+```{r viz, fig.height=7, dpi=300}
 viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases) /
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, log = TRUE)
 ```
 
-```{r viz2, fig.height=10, dpi=300}
+```{r viz2, fig.height=7, dpi=300}
 viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE) / 
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
 ```
