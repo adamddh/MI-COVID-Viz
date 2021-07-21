@@ -94,7 +94,7 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
       data = df2,
       mapping = aes(x = as.Date({{x}}), y = y, color = "red")
     ) +
-    scale_x_date(date_labels = "%m-%d", date_breaks = "1 month") + 
+    scale_x_date(date_labels = "%m-%y", date_breaks = "2 months") + 
     theme(legend.position = "none") +
     labs(
       title = paste("Michigan Coronavirus", deparse(substitute(y)), "updated", date_update),
