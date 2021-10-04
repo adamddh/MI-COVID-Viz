@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Oct 02, 2021
+Oct 04, 2021
 
 Get link for data:
 
@@ -135,7 +135,7 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 6 days of data have been colored red on the graph, as
+Note that the last 4 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 4 weeks in the past (as hospitalizations and deaths
 usually follow cases by three weeks, and the deaths graph regression
