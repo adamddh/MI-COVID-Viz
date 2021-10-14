@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Oct 13, 2021
+Oct 14, 2021
 
 Get link for data:
 
@@ -47,12 +47,12 @@ mi_data.head()
     ## 3  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
     ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
     ## 
-    ##    Deaths.Cumulative                 Updated  
-    ## 0                0.0 2021-10-11 14:36:05.996  
-    ## 1                0.0 2021-10-11 14:36:05.996  
-    ## 2                0.0 2021-10-11 14:36:05.996  
-    ## 3                0.0 2021-10-11 14:36:05.996  
-    ## 4                0.0 2021-10-11 14:36:05.996
+    ##    Deaths.Cumulative                       Updated  
+    ## 0                0.0 2021-10-13 12:41:24.860699904  
+    ## 1                0.0 2021-10-13 12:41:24.860699904  
+    ## 2                0.0 2021-10-13 12:41:24.860699904  
+    ## 3                0.0 2021-10-13 12:41:24.860699904  
+    ## 4                0.0 2021-10-13 12:41:24.860699904
 
 ``` python
 max_date = max(mi_data["Updated"])
@@ -135,7 +135,7 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 5 days of data have been colored red on the graph, as
+Note that the last 6 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 4 weeks in the past (as hospitalizations and deaths
 usually follow cases by three weeks, and the deaths graph regression
