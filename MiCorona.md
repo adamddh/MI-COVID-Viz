@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Nov 12, 2021
+Nov 14, 2021
 
 Get link for data:
 
@@ -48,11 +48,11 @@ mi_data.head()
     ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
     ## 
     ##    Deaths.Cumulative                       Updated  
-    ## 0                0.0 2021-11-10 15:10:29.197200128  
-    ## 1                0.0 2021-11-10 15:10:29.197200128  
-    ## 2                0.0 2021-11-10 15:10:29.197200128  
-    ## 3                0.0 2021-11-10 15:10:29.197200128  
-    ## 4                0.0 2021-11-10 15:10:29.197200128
+    ## 0                0.0 2021-11-12 17:22:39.675399936  
+    ## 1                0.0 2021-11-12 17:22:39.675399936  
+    ## 2                0.0 2021-11-12 17:22:39.675399936  
+    ## 3                0.0 2021-11-12 17:22:39.675399936  
+    ## 4                0.0 2021-11-12 17:22:39.675399936
 
 ``` python
 max_date = max(mi_data["Updated"])
@@ -127,7 +127,7 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
 ```
 
-    ## Warning: Removed 1 rows containing missing values (geom_smooth).
+    ## Warning: Removed 2 rows containing missing values (geom_smooth).
 
     ## Warning: Removed 13 rows containing non-finite values (stat_smooth).
 
