@@ -91,7 +91,7 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
   plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = y)) +
     ylim(c(0,NA)) +
     geom_point(alpha = .5) +
-    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 30), se = FALSE) +
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 50), se = FALSE) +
     geom_point(
       data = df2,
       mapping = aes(x = as.Date({{x}}), y = y, color = "red")

@@ -89,7 +89,7 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
   plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = y)) +
     ylim(c(0,NA)) +
     geom_point(alpha = .5) +
-    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 30), se = FALSE) +
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 50), se = FALSE) +
     geom_point(
       data = df2,
       mapping = aes(x = as.Date({{x}}), y = y, color = "red")
@@ -127,7 +127,7 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
 ```
 
-    ## Warning: Removed 2 rows containing missing values (geom_smooth).
+    ## Warning: Removed 1 rows containing missing values (geom_smooth).
 
     ## Warning: Removed 13 rows containing non-finite values (stat_smooth).
 
