@@ -74,6 +74,8 @@ mi_cases_by_day_last4 = py$mi_cases_by_day_last4
 Visualization:
 
 ``` r
+ma <- function(x, n = 7){stats::filter(x, rep(1 / n, n), sides = 2)}
+
 viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
   
   if (log) {
@@ -86,10 +88,14 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
     y_lbl = deparse(substitute(y))
   }
   
+  # Moving average
+  avg = ma(df["y"])
+  df = bind_cols(df, avg = avg)
+  
   plot <- ggplot(data = df, mapping = aes(x = as.Date({{x}}), y = y)) +
     ylim(c(0,NA)) +
     geom_point(alpha = .5) +
-    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs", k = 50), se = FALSE) +
+    geom_line(y = avg, color = "blue") +
     geom_point(
       data = df2,
       mapping = aes(x = as.Date({{x}}), y = y, color = "red")
@@ -98,6 +104,7 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
     theme(legend.position = "none") +
     labs(
       title = paste("Michigan Coronavirus", deparse(substitute(y)), "updated", date_update),
+      subtitle = "With 7 day moving average",
       x = deparse(substitute(x)),
       y = y_lbl
     )
@@ -118,20 +125,12 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases) /
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, log = TRUE)
 ```
 
-    ## Warning: Removed 1 rows containing missing values (geom_smooth).
-
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
 ``` r
 viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE) / 
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
 ```
-
-    ## Warning: Removed 1 rows containing missing values (geom_smooth).
-
-    ## Warning: Removed 13 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 1 rows containing missing values (geom_smooth).
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
