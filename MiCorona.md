@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Jan 03, 2022
+Jan 05, 2022
 
 Get link for data:
 
@@ -41,18 +41,18 @@ mi_data.head()
 ```
 
     ##    COUNTY       Date CASE_STATUS  Cases  Deaths  Cases.Cumulative  \
-    ## 0  Alcona 2020-03-01   Confirmed    0.0     0.0               0.0   
-    ## 1  Alcona 2020-03-02   Confirmed    0.0     0.0               0.0   
-    ## 2  Alcona 2020-03-03   Confirmed    0.0     0.0               0.0   
-    ## 3  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
-    ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
+    ## 0  Alcona        NaT   Confirmed    0.0     5.0            1121.0   
+    ## 1  Alcona 2020-03-01   Confirmed    0.0     0.0               0.0   
+    ## 2  Alcona 2020-03-02   Confirmed    0.0     0.0               0.0   
+    ## 3  Alcona 2020-03-03   Confirmed    0.0     0.0               0.0   
+    ## 4  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
     ## 
     ##    Deaths.Cumulative                       Updated  
-    ## 0                0.0 2021-12-29 14:11:47.625999872  
-    ## 1                0.0 2021-12-29 14:11:47.625999872  
-    ## 2                0.0 2021-12-29 14:11:47.625999872  
-    ## 3                0.0 2021-12-29 14:11:47.625999872  
-    ## 4                0.0 2021-12-29 14:11:47.625999872
+    ## 0               53.0 2022-01-05 15:12:55.808700160  
+    ## 1                0.0 2022-01-05 15:12:55.808700160  
+    ## 2                0.0 2022-01-05 15:12:55.808700160  
+    ## 3                0.0 2022-01-05 15:12:55.808700160  
+    ## 4                0.0 2022-01-05 15:12:55.808700160
 
 ``` python
 max_date = max(mi_data["Updated"])
@@ -134,7 +134,7 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 2 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available. Vertical
 orange line at 4 weeks in the past (as hospitalizations and deaths
 usually follow cases by three weeks, and the deaths graph regression
