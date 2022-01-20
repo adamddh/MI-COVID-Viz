@@ -130,6 +130,6 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases) /
 ```{r viz2, fig.height=7, dpi=300, warning=FALSE}
 viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE) / 
   viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
-```
+```f
 
 Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. Vertical orange line at 4 weeks in the past (as hospitalizations and deaths usually follow cases by three weeks, and the deaths graph regression line is behind by another week).
