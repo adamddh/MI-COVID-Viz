@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Feb 02, 2022
+Feb 03, 2022
 
 Get link for data:
 
@@ -47,12 +47,12 @@ mi_data.head()
     ## 3  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
     ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
     ## 
-    ##    Deaths.Cumulative                       Updated  
-    ## 0                0.0 2022-01-31 15:52:42.383800064  
-    ## 1                0.0 2022-01-31 15:52:42.383800064  
-    ## 2                0.0 2022-01-31 15:52:42.383800064  
-    ## 3                0.0 2022-01-31 15:52:42.383800064  
-    ## 4                0.0 2022-01-31 15:52:42.383800064
+    ##    Deaths.Cumulative                    Updated  
+    ## 0                0.0 2022-02-02 13:44:26.102400  
+    ## 1                0.0 2022-02-02 13:44:26.102400  
+    ## 2                0.0 2022-02-02 13:44:26.102400  
+    ## 3                0.0 2022-02-02 13:44:26.102400  
+    ## 4                0.0 2022-02-02 13:44:26.102400
 
 ``` python
 max_date = max(mi_data["Updated"])
@@ -121,8 +121,8 @@ viz_function <- function(df, df2, x, y, vertline = TRUE, log = FALSE) {
 ```
 
 ``` r
-viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases) /
-  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, log = TRUE)
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, vertline = FALSE) /
+  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, log = TRUE, vertline = FALSE)
 ```
 
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
@@ -134,8 +134,5 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 5 days of data have been colored red on the graph, as
-they frequently change as more information becomes available. Vertical
-orange line at 4 weeks in the past (as hospitalizations and deaths
-usually follow cases by three weeks, and the deaths graph regression
-line is behind by another week).
+Note that the last 6 days of data have been colored red on the graph, as
+they frequently change as more information becomes available.
