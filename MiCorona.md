@@ -47,12 +47,12 @@ mi_data.head()
     ## 3  Alcona 2020-03-04   Confirmed    0.0     0.0               0.0   
     ## 4  Alcona 2020-03-05   Confirmed    0.0     0.0               0.0   
     ## 
-    ##    Deaths.Cumulative                       Updated  
-    ## 0                0.0 2022-02-04 11:58:24.527800064  
-    ## 1                0.0 2022-02-04 11:58:24.527800064  
-    ## 2                0.0 2022-02-04 11:58:24.527800064  
-    ## 3                0.0 2022-02-04 11:58:24.527800064  
-    ## 4                0.0 2022-02-04 11:58:24.527800064
+    ##    Deaths.Cumulative                    Updated  
+    ## 0                0.0 2022-02-07 13:24:29.501600  
+    ## 1                0.0 2022-02-07 13:24:29.501600  
+    ## 2                0.0 2022-02-07 13:24:29.501600  
+    ## 3                0.0 2022-02-07 13:24:29.501600  
+    ## 4                0.0 2022-02-07 13:24:29.501600
 
 ``` python
 max_date = max(mi_data["Updated"])
@@ -134,5 +134,5 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 4 days of data have been colored red on the graph, as
+Note that the last 7 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
