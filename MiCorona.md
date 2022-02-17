@@ -29,8 +29,9 @@ finallink = "https://michigan.gov" + \
 Download data:
 
 ``` r
-download.file(py$finallink, destfile = "data/covid.xlsx")
-mi_data = readxl::read_excel("data/covid.xlsx")
+temp <- tempfile()
+download.file(py$finallink, destfile = temp)
+mi_data = readxl::read_excel(temp)
 ```
 
 Clean data:
