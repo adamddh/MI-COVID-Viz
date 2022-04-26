@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Apr 22, 2022
+Apr 26, 2022
 
 Get link for data:
 
@@ -15,15 +15,15 @@ from datetime import datetime, timedelta
 url = "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html"
 
 html = urlopen(url).read().decode("utf-8")
-start_index = html.find("shortdesc")
-end_index = html.find("footerArea")
-data = html[start_index:end_index]
 
-soup = BeautifulSoup(data, features="html.parser")
+soup = BeautifulSoup(html, features="html.parser")
 links = [link.get('href') for link in soup.find_all('a')]
 
-finallink = "https://michigan.gov" + \
-    [i for i in links if "by_Date" in i][0]
+# find the link that has "by_Date" in it
+for link in links:
+    if isinstance(link, str) and "Cases-and-Deaths-by-County-and-by-Date-of-Symptom" in link:
+        break
+finallink = f"https://michigan.gov{link}"
 ```
 
 Download data:
@@ -135,5 +135,5 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, ver
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 5 days of data have been colored red on the graph, as
+Note that the last 1 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
