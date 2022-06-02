@@ -129,8 +129,8 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, vert
 ```
 
 ```{r viz2, fig.height=7, dpi=300, warning=FALSE}
-viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE) / 
-  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = TRUE) / 
+  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = TRUE, log = TRUE)
 ```
 
 Note that the last `r length(unique(mi_cases_by_day_last4$Date))` days of data have been colored red on the graph, as they frequently change as more information becomes available. 

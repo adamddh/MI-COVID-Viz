@@ -1,7 +1,7 @@
 Michigan COVID Data
 ================
 Adam D. DenHaan
-Jun 01, 2022
+Jun 02, 2022
 
 Get link for data:
 
@@ -129,11 +129,11 @@ viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Cases, vert
 ![](MiCorona_files/figure-gfm/viz-1.png)<!-- -->
 
 ``` r
-viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE) / 
-  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = FALSE, log = TRUE)
+viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = TRUE) / 
+  viz_function(mi_cases_by_day_exclusive, mi_cases_by_day_last4, Date, Deaths, vertline = TRUE, log = TRUE)
 ```
 
 ![](MiCorona_files/figure-gfm/viz2-1.png)<!-- -->
 
-Note that the last 7 days of data have been colored red on the graph, as
+Note that the last 6 days of data have been colored red on the graph, as
 they frequently change as more information becomes available.
